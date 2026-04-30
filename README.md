@@ -13,33 +13,33 @@ In development. Not yet ready for install.
 
 ## Install (when ready)
 
-### Option 1 — Manual install (works everywhere)
+### Option 1 — Claude Code CLI (recommended)
 
-Clone the repo into your Claude skills folder:
+In your terminal, run:
+
+```bash
+claude plugin marketplace add nicolaas-spijker/project-manager-skills
+claude plugin install project-manager-skills@project-manager-skills
+```
+
+Verify with `claude plugin list`. Skills appear as slash commands in any Claude Code session, e.g. `/sprint-planner`.
+
+### Option 2 — Manual install
+
+If you prefer to install without the marketplace:
 
 ```bash
 git clone https://github.com/nicolaas-spijker/project-manager-skills.git ~/.claude/skills/project-manager-skills
 ```
 
-Restart Claude Code. Skills appear as slash commands, e.g. `/sprint-planner`.
-
-### Option 2 — Plugin marketplace (newer Claude Code versions)
-
-In a Claude Code session that supports the plugin marketplace, run:
-
-```
-/plugin marketplace add nicolaas-spijker/project-manager-skills
-/plugin install project-manager-skills
-```
-
-Not available everywhere yet. If `/plugin` does not autocomplete in your Claude Code, use Option 1.
+Restart Claude Code. Skills appear as slash commands.
 
 ### Where this works
 
-- Claude Code CLI: yes (both options).
-- Claude Code IDE extensions (VS Code, Cursor, etc.): yes (Option 1 always, Option 2 depending on version).
-- Claude Code desktop app: yes (both options).
-- claude.ai/code (web): not currently supported — slash commands like `/plugin` are not available in the web interface.
+- Claude Code CLI: yes.
+- Claude Code IDE extensions (VS Code, Cursor, etc.): yes — install via terminal, skills are picked up by the extension automatically.
+- Claude Code desktop app: yes.
+- claude.ai/code (web): not currently supported — the web interface does not run plugin commands or local skills.
 - Claude.ai chat / Claude desktop app: this repo ships Claude Code skills, not Claude.ai Skills (`.skill` packages). A `.skill`-format release may come later.
 
 ## Tier 2 setup
