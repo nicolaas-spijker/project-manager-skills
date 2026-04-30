@@ -17,10 +17,16 @@ A small number of skills (~5-8) are Rock-only because the work IS the push: stat
 
 ## Audience
 
+**The first step into Claude Code for agencies who currently only use AI in chat.**
+
 - Non-technical agency owners and PMs in Manila, Mexico City, Lagos, Jakarta, Karachi.
-- Already using ChatGPT/Gemini for client work. B2/C1 English.
+- Already using ChatGPT/Claude/Gemini in the browser for client work. B2/C1 English.
+- Have heard of Claude Code but haven't installed it. The barrier is "I'm not a developer, this isn't for me."
 - Want to plan client work fast without learning to code.
-- They get Claude Code installed by following our README, paste a Rock bot key once, and use `/sprint-planner` like a slash command.
+
+**The library is the reason to install Claude Code in the first place.** The pitch is: "If you use AI chat for sprint planning, retros, or client briefs, install Claude Code (5 minutes), install this library (1 command), and now those workflows are slash commands." The README must read accordingly: assume zero Claude Code knowledge, walk them in click-by-click. Skills should feel like simple, polished slash commands, not developer tools.
+
+This audience framing matters because it dissolves the "Claude Code skews technical" objection. We are not competing for existing Claude Code users — we are the on-ramp that brings agency PMs into Claude Code, with Rock as the natural workspace destination on the other side.
 
 ## Working principles
 
