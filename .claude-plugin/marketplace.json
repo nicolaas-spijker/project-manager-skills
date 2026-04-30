@@ -1,0 +1,19 @@
+{
+  "name": "project-manager-skills",
+  "owner": {
+    "name": "Nicolaas Spijker",
+    "url": "https://signalroads.com"
+  },
+  "metadata": {
+    "description": "Project management skills for Claude Code: sprint planning, retros, RAID logs, stakeholder maps, client onboarding, and more.",
+    "version": "0.1.0",
+    "repository": "https://github.com/nicolaas-spijker/project-manager-skills"
+  },
+  "plugins": [
+    {
+      "name": "project-manager-skills",
+      "description": "Project management skills for agency owners, PMs, and small teams. Tier 1 skills are platform-neutral. Tier 2 skills push tasks, notes, and chat messages to a Rock workspace.",
+      "source": "./"
+    }
+  ]
+}

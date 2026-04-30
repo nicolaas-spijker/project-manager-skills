@@ -1,0 +1,12 @@
+{
+  "name": "project-manager-skills",
+  "description": "Project management skills for Claude Code. Plan sprints, run retros, build RAID logs, map stakeholders, onboard clients, and more.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Nicolaas Spijker"
+  },
+  "homepage": "https://github.com/nicolaas-spijker/project-manager-skills",
+  "repository": "https://github.com/nicolaas-spijker/project-manager-skills",
+  "license": "MIT",
+  "skills": "./skills"
+}

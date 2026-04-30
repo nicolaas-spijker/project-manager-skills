@@ -13,11 +13,16 @@ In development. Not yet ready for install.
 
 ## Install (when ready)
 
-```bash
-git clone https://github.com/nicolaas-spijker/project-manager-skills.git ~/.claude/skills/project-manager-skills
+Inside Claude Code, run:
+
+```
+/plugin marketplace add nicolaas-spijker/project-manager-skills
+/plugin install project-manager-skills
 ```
 
 Then run any skill in Claude Code, e.g. `/sprint-planner`.
+
+No GitHub app, no auth setup, no terminal commands required.
 
 ## Tier 2 setup
 
