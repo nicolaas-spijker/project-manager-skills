@@ -1,6 +1,6 @@
-# Rock Skills
+# Project Manager Skills
 
-Open-source Claude Code skills library for project management.
+Open-source Claude Code skills library for project managers, agency owners, and small teams.
 
 50 skills across two tiers:
 
@@ -14,7 +14,7 @@ In development. Not yet ready for install.
 ## Install (when ready)
 
 ```bash
-git clone https://github.com/nicolaasspijker/rock-skills.git ~/.claude/skills/rock-skills
+git clone https://github.com/nicolaas-spijker/project-manager-skills.git ~/.claude/skills/project-manager-skills
 ```
 
 Then run any skill in Claude Code, e.g. `/sprint-planner`.

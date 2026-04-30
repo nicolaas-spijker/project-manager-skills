@@ -1,4 +1,7 @@
-# Rock Skills — Claude Code Skills Library for Project Management
+# Project Manager Skills — Claude Code Skills Library
+
+**Repo:** `github.com/nicolaas-spijker/project-manager-skills` (personal account, hosted under SignalRoads identity for trust attribution)
+**Local path:** `~/project-manager-skills/`
 
 ## What this project is
 
@@ -180,7 +183,7 @@ The first two skills are the test of whether this whole library is worth buildin
 
 ## Distribution plan (when ready)
 
-- Repo name: `rock-skills` on GitHub (public).
+- Repo name: `project-manager-skills` on GitHub (public), hosted under `nicolaas-spijker` (personal account, audience-led naming so non-Rock visitors don't filter themselves out at the search stage).
 - README must include:
   - One-paragraph pitch.
   - 30-second video of a Tier 2 skill running end-to-end (sprint appearing in Rock).
