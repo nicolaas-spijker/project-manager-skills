@@ -7,12 +7,13 @@
 
 An open-source Claude Code skills library for project management, modeled on Corey Haines's `marketing-skills` repo (19.6K stars). Distributed via GitHub, runs inside Claude Code (claude.ai/code or the desktop/IDE versions).
 
-The library has two tiers:
+**Architecture: unified skills with optional Rock push.** Every skill produces a useful prompt-only output by default (sprint plan, retro themes, stakeholder map, etc.). At the end of every output, the skill softly offers an optional push to a connected Rock space. Not aggressive — just a single line that surfaces the option for users who want their plan to live somewhere persistent.
 
-- **Tier 1 — Prompt-only (~35 skills):** self-contained PM frameworks. Output text the user copy-pastes wherever. No API, no auth, no Rock account required. This is the audience-acquisition layer.
-- **Tier 2 — Rock-connected (~15 skills):** same skills with an optional push step. Materialize tasks, notes, sprints, and chat messages directly into a user's Rock space via the bot API. This is the conversion layer.
+This collapses what would have been ~50 skills into ~40 unified skills. Every interaction is a potential conversion moment instead of just 15. The split between "prompt-only" and "push" disappears — same logic, different last step, surfaced naturally.
 
-The funnel: Tier 1 wins GitHub stars + organic discovery, Tier 2 turns that audience into Rock signups by demonstrating the platform's "BYOK AI at no surcharge" pitch in a tangible way.
+The funnel: prompt-only outputs win GitHub stars and organic discovery (the "Helpful > salesy" rule still holds — the output is useful even if the user never touches Rock). The optional push step demonstrates Rock's "BYOK AI at no surcharge" differentiator and converts users who want to materialize the plan in a workspace.
+
+A small number of skills (~5-8) are Rock-only because the work IS the push: status updates posted to chat, meeting notes saved as Rock notes, recurring task patterns set up in a space. These skills assume a configured `ROCK_BOT_API_KEY` and exit cleanly with setup instructions if one is missing.
 
 ## Audience
 
@@ -103,9 +104,9 @@ If a skill's value depends on these missing endpoints, queue it for v2 instead o
   4. Paste it as `ROCK_BOT_API_KEY` in their Claude Code project settings.
 - Switching between client spaces means swapping the key. Document this clearly. The skill should call `getBotInfo` first and echo back "Connected to: <space name>" so the user is sure they hit the right space before pushing.
 
-## The 50 skills
+## The skill list (~40 unified skills)
 
-### Tier 1 — Prompt-only (35 skills)
+Every skill below produces a useful prompt-only output AND ends with the optional Rock push offer. Group these as one unified list, not split into prompt-only vs push tiers.
 
 **Project planning (8)**
 1. `sprint-planner` — sprint of any length with goals, capacity, ceremonies, task list
@@ -152,34 +153,22 @@ If a skill's value depends on these missing endpoints, queue it for v2 instead o
 34. `porters-five-forces`
 35. `pestel-scan`
 
-### Tier 2 — Rock-connected push skills (15)
+**Workflow-specific (3, came from former Tier 2 list)**
+36. `content-calendar` — outputs a multi-week content plan with due dates and channels; offers push as Rock tasks with labels
+37. `launch-plan` — outputs a launch checklist with phases and owners; offers push as a Rock task list
+38. `bug-triage` — outputs bug categorization, severity, owner, and next-action; offers push as Rock tasks with labels
 
-Each Tier 2 skill should be the natural extension of a Tier 1 skill. The user runs Tier 1 to draft, then Tier 2 to push.
+**Rock-only (2, where the work IS the push)**
+39. `setup-recurring-tasks` — configure Rock's recurring-task pattern in a connected space (no useful prompt-only output)
+40. `meeting-notes-to-rock` — structure raw meeting notes into a Rock note + action tasks; assumes a connected space because the structuring choice depends on Rock's note-vs-task distinction
 
-36. `push-sprint` — create sprint + tasks + labels in the connected space
-37. `push-onboarding` — full client onboarding tasks + welcome note
-38. `push-project-from-brief` — convert a brief into a task list
-39. `push-retro-actions` — create tasks from retro themes
-40. `push-kickoff-pack` — kickoff note + first-week tasks + intro chat message
-41. `push-status-report` — post status to chat + save as note
-42. `push-raid-log` — RAID log as a note in the space
-43. `push-okrs-tasks` — OKRs as tasks with labels
-44. `push-content-calendar` — content tasks with due dates and labels
-45. `push-launch-plan` — launch checklist as a task list
-46. `push-bug-triage` — bug labels + initial triage tasks
-47. `push-recurring-tasks` — set up a recurring weekly/monthly task pattern
-48. `push-sprint-retro` — retro note + action tasks
-49. `push-stakeholder-update` — note + chat post for stakeholders
-50. `push-meeting-notes` — turn meeting notes into a note + tasks for action items
+## Building order (do not write all 40 at once)
 
-## Building order (do not write all 50 at once)
+Spend real care on the first one. It's the template every other skill copies.
 
-The first two skills are the test of whether this whole library is worth building. Spend real care on them.
-
-1. **Skill #1 — `sprint-planner` (Tier 1).** Prove the prompt-only architecture. End-to-end test in Claude Code. The output should be good enough that a non-Rock user finds it useful on its own.
-2. **Skill #2 — `push-sprint` (Tier 2).** Same logic, but ends in API calls to a real Rock space. Test against a throwaway space first. Validate: confirmation flow, error handling on bad keys, what happens if the space already has tasks with the same names.
-3. **Audit step.** What worked? What was painful? What API gaps surfaced? Update this CLAUDE.md with findings.
-4. **Then scale.** Build the remaining 48 in batches of 5, testing each batch end-to-end before moving on.
+1. **Skill #1 — `sprint-planner`.** Prove the unified architecture: prompt-only output that genuinely helps, with the optional Rock push offer baked into the closing block. End-to-end test in Claude Code. The output should be useful for a non-Rock user, AND the push step should work cleanly when the user opts in.
+2. **Audit step.** What worked? What was painful? What API gaps surfaced? Update this CLAUDE.md with findings before scaling.
+3. **Then scale.** Build the remaining 39 in batches of 5, testing each batch end-to-end before moving on. Reuse the closing-block pattern from `sprint-planner` so the soft Rock nudge is consistent across every skill.
 
 ## Distribution plan (when ready)
 
@@ -195,11 +184,12 @@ The first two skills are the test of whether this whole library is worth buildin
 
 ## Things to NOT do
 
-- Do not invent skills outside the 50 above without revisiting the strategy. Library scope creep kills polish.
-- Do not ship a Tier 2 skill without a Tier 1 skill backing it. Every push skill needs a draft step.
-- Do not push to a real Rock space during development. Use a dedicated test space.
+- Do not invent skills outside the ~40 above without revisiting the strategy. Library scope creep kills polish.
+- Do not push to a real Rock space during development. Use a dedicated test space (`TEST_API` bot key).
 - Do not promise functionality that depends on missing API endpoints (`createSpace`, `listSpaces`, file uploads).
-- Do not name skills `rock-X` if they are Tier 1. Tier 1 skills should be platform-neutral so they read as broadly useful, not Rock-marketing.
+- Do not name skills `rock-X`. Skills should read as broadly useful, with the Rock connection introduced at the end of the output, not in the name.
+- Do not make the Rock push aggressive. One soft line at the end of the output, italicized, with the `push to Rock` trigger phrase. Never auto-push without explicit user confirmation.
+- Do not skip the "no key configured" path. Every skill that offers a push must handle the missing-key case with a clear setup prompt, not a silent failure.
 
 ## Reference
 

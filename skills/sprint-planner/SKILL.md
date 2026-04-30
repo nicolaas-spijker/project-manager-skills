@@ -162,7 +162,37 @@ For each committed task, list the sub-steps that make it complete. Keep checklis
 ## Definition of Done (for committed items)
 - [Default: acceptance criteria met, code reviewed, tests pass, deployed to staging, demoed]
 - [Adjust based on team]
+
+---
+
+*Plan ready. Paste into any project tool (Notion, Jira, Linear, Trello, Asana, Rock).*
+
+*Want it materialized in a Rock workspace? Say "push to Rock" and I'll create the sprint, tasks (with checklists), assignees, and due dates directly in your space using your `ROCK_BOT_API_KEY`. New to Rock? Setup takes ~2 minutes at [rock.so](https://rock.so).*
 ```
+
+## Optional Rock push step
+
+If the user responds with "push to Rock" (or similar) after seeing the plan:
+
+1. Check for `ROCK_BOT_API_KEY` in the environment. If missing, point them at the setup steps:
+   - Create a Rock space at [rock.so](https://rock.so)
+   - In the space, go to Settings → Integrations → create a bot
+   - Copy the bot key, set it as `ROCK_BOT_API_KEY` in your Claude Code project
+   - Re-run `/sprint-planner` and confirm the push
+
+2. With a key present, call `getBotInfo` first and echo back: "Connected to: <space name>. Push the sprint here?" Wait for explicit confirmation before any writes.
+
+3. On confirmation, push in this order using the Rock bot API at `https://api.rock.so/webhook/bot?auth=<key>&method=<method>`:
+   - **Sprint:** if the user has the Unlimited plan, create a sprint via the appropriate method. If unsure, default to creating tasks tagged with a sprint label.
+   - **Tasks:** for each committed task, `POST createTask` with title, description (include the checklist as the description body), assignee, due date.
+   - **Stretch tasks:** create with a "stretch" label.
+   - **Kickoff message:** `POST sendMessage` with the sprint goal and a quick summary so the team sees the new sprint in chat.
+
+4. After push, report back: "Created N tasks in Rock. View at <space URL>." Do not invent the URL — ask the user for it or omit if unknown.
+
+5. **If anything fails partway,** stop and report what was created vs. not. Do not "clean up" without asking — the user may want to keep partial state.
+
+Be conservative on writes. Each user has a finite number of Rock spaces, and a bad push experience is worse than no push at all.
 
 ## Tone and style
 
