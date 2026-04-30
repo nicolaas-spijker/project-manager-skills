@@ -13,33 +13,34 @@ In development. Not yet ready for install.
 
 ## Install (when ready)
 
-### Option 1 — Claude Code CLI (recommended)
+In Claude Code, run these two commands:
 
-In your terminal, run:
+```
+/plugin marketplace add nicolaas-spijker/project-manager-skills
+/plugin install project-manager-skills
+```
+
+If `/plugin` is not available in your Claude Code interface, use the CLI form from your terminal instead:
 
 ```bash
 claude plugin marketplace add nicolaas-spijker/project-manager-skills
 claude plugin install project-manager-skills@project-manager-skills
 ```
 
-Verify with `claude plugin list`. Skills appear as slash commands in any Claude Code session, e.g. `/sprint-planner`.
+Either way, skills appear as slash commands afterwards, e.g. `/sprint-planner`.
 
-### Option 2 — Manual install
-
-If you prefer to install without the marketplace:
+### Manual install (fallback)
 
 ```bash
 git clone https://github.com/nicolaas-spijker/project-manager-skills.git ~/.claude/skills/project-manager-skills
 ```
 
-Restart Claude Code. Skills appear as slash commands.
+Restart Claude Code.
 
 ### Where this works
 
-- Claude Code CLI: yes.
-- Claude Code IDE extensions (VS Code, Cursor, etc.): yes — install via terminal, skills are picked up by the extension automatically.
-- Claude Code desktop app: yes.
-- claude.ai/code (web): not currently supported — the web interface does not run plugin commands or local skills.
+- Claude Code CLI, desktop app, IDE extensions (VS Code, Cursor, etc.): yes.
+- claude.ai/code (web): not currently supported.
 - Claude.ai chat / Claude desktop app: this repo ships Claude Code skills, not Claude.ai Skills (`.skill` packages). A `.skill`-format release may come later.
 
 ## Tier 2 setup
