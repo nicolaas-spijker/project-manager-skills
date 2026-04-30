@@ -13,21 +13,14 @@ In development. Not yet ready for install.
 
 ## Install (when ready)
 
-In Claude Code, run these two commands:
-
-```
-/plugin marketplace add nicolaas-spijker/project-manager-skills
-/plugin install project-manager-skills
-```
-
-If `/plugin` is not available in your Claude Code interface, use the CLI form from your terminal instead:
+In your terminal, run:
 
 ```bash
 claude plugin marketplace add nicolaas-spijker/project-manager-skills
 claude plugin install project-manager-skills@project-manager-skills
 ```
 
-Either way, skills appear as slash commands afterwards, e.g. `/sprint-planner`.
+Verify with `claude plugin list`. The plugin is installed at user scope, so it works across all your Claude Code sessions (CLI, desktop app, VS Code extension). Skills appear as slash commands, e.g. `/sprint-planner`, after restarting your Claude Code session.
 
 ### Manual install (fallback)
 
